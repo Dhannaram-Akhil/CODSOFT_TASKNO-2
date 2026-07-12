@@ -1,0 +1,306 @@
+:root {
+    /* Hardened Light Theme Contrast Configuration */
+    --bg-primary: #f1f5f9;      /* Slightly deeper slate gray background to reduce blinding whiteness */
+    --bg-surface: #ffffff;      /* Pure white cards so they contrast sharply with the background */
+    --text-primary: #0f172a;    /* Deep navy slate text for premium readability */
+    --text-secondary: #475569;  /* Darker gray secondary text so it doesn't wash away */
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --border: #cbd5e1;          /* Sharper, more visible borders around containers and inputs */
+    --danger: #ef4444;
+    --danger-light: #fee2e2;
+    --success: #10b981;
+    --warning: #d97706;         /* Slightly darker warning orange for dynamic visibility */
+    --shadow: 0 4px 6px -1px rgb(15 23 42 / 0.08), 0 2px 4px -2px rgb(15 23 42 / 0.08); /* Sophisticated darker card shadow */
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-surface: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border: #334155;
+    --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* Prevent text size adjustments on orientation change */
+    -webkit-text-size-adjust: 100%; 
+    /* Remove annoying blue highlight flash when tapping on mobile Chrome/Safari */
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    padding: 1rem; /* Reduced for mobile edges */
+}
+
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+h1 {
+    font-size: 1.75rem; /* Better scale for mobile */
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), #818cf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.progress-container {
+    background: var(--border);
+    border-radius: 10px;
+    height: 8px;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--primary), #10b981);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* Accessible Mobile Tap Targets */
+.btn {
+    padding: 0.75rem 1.25rem; /* Increased vertical padding for finger taps */
+    min-height: 44px; /* Strict mobile accessibility standard */
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    box-shadow: var(--shadow);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Using media interaction queries so mobile touch doesn't get "stuck" in a hover state */
+@media (hover: hover) {
+    .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
+}
+.btn-primary:active { transform: translateY(1px); }
+
+.btn-danger {
+    background-color: transparent;
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    width: 100%; /* Full width on mobile for easier reach */
+}
+
+.theme-toggle {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+/* Mobile-First Stats Layout */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Force side-by-side even on small phones */
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.stat-card {
+    background: var(--bg-surface);
+    padding: 0.75rem 0.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.stat-card h3 {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+.stat-card p {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-top: 0.25rem;
+}
+
+.stat-success { color: var(--success); }
+.stat-warning { color: var(--warning); }
+
+/* Responsive Form Controls */
+.card {
+    background: var(--bg-surface);
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr; /* Stack on mobile screens */
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    color: var(--text-secondary);
+}
+
+input, select {
+    width: 100%;
+    padding: 0.75rem;
+    min-height: 44px; /* Massive tap improvement */
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    font-size: 1rem; /* Critical: 16px/1rem prevents iOS Safari from forcing an ugly page zoom-in on focus */
+}
+
+input:focus, select:focus {
+    outline: 2px solid var(--primary);
+}
+
+.controls-row {
+    display: grid;
+    grid-template-columns: 1fr; /* Full stack sorting on mobile */
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+/* Mobile Layout for Task Cards */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.task-item {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--text-secondary);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: var(--shadow);
+}
+
+.task-checkbox {
+    min-width: 1.35rem;
+    min-height: 1.35rem;
+    cursor: pointer;
+}
+
+.task-content {
+    flex-grow: 1;
+    min-width: 0; /* Prevents text overflow breaks */
+}
+
+.task-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Smooth text cropping on tiny views */
+}
+
+.task-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.badge {
+    padding: 0.15rem 0.5rem;
+    border-radius: 2rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+}
+
+.badge-overdue {
+    background-color: var(--danger-light);
+    color: var(--danger);
+    border-color: transparent;
+}
+
+.task-actions {
+    display: flex;
+    gap: 0.35rem;
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+}
+
+.list-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: var(--text-secondary);
+    background: var(--bg-surface);
+    border-radius: 1rem;
+    border: 2px dashed var(--border);
+}
+
+/* Media Queries for Tablet/Desktop Expansion */
+@media (min-width: 600px) {
+    body { padding: 3rem 1rem; }
+    h1 { font-size: 2.25rem; }
+    .stats-grid { gap: 1.25rem; margin-bottom: 1.25rem; }
+    .stat-card { padding: 1.25rem; }
+    .stat-card p { font-size: 2rem; }
+    .form-row { grid-template-columns: repeat(3, 1fr); }
+    .controls-row { grid-template-columns: 2fr 1fr 1fr; gap: 1rem; }
+    .btn-danger { width: auto; }
+}
