@@ -37,7 +37,7 @@ To make this project stand out from typical tutorial implementations, the follow
 
 
  📂 Project Architecture
-
+|
 |
 todo-app/
 │
